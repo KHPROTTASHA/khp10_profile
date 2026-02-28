@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CR7 Lifestyle - Cristiano Ronaldo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* হেডার */
+        .page-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+        }
+
+        .back-home {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s;
+        }
+
+        .back-home:hover {
+            color: #ff0000;
+        }
+
+        .back-home span {
+            font-size: 20px;
+        }
+
+        .page-logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #fff;
+            text-decoration: none;
+            border: 2px solid #ff0000;
+            padding: 5px 12px;
+        }
+
+        /* হিরো সেকশন */
+        .lifestyle-hero {
+            height: 100vh;
+            background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%), url('https://images.unsplash.com/photo-1519677100203-a0e668c92439?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 10%;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content .label {
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-content .label::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -10px;
+            width: 30px;
+            height: 2px;
+            background: #ff0000;
+            transform: translateY(-50%);
+        }
+
+        .hero-content h1 {
+            font-size: 82px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        /* গ্যালারি সেকশন */
+        .gallery-section {
+            padding: 100px 50px;
+            background: #000;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #888;
+            font-size: 16px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 30px 20px 20px;
+            transform: translateY(100%);
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .gallery-overlay p {
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        /* কালেকশন সেকশন */
+        .collection-section {
+            padding: 100px 50px;
+            background: linear-gradient(180deg, #000 0%, #111 100%);
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .collection-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #222;
+            padding: 40px;
+            transition: all 0.3s;
+        }
+
+        .collection-card:hover {
+            border-color: #ff0000;
+            transform: translateY(-10px);
+        }
+
+        .collection-card h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ff0000;
+        }
+
+        .collection-card p {
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .collection-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #ff0000;
+            padding-bottom: 5px;
+        }
+
+        /* ফুটার */
+        .page-footer {
+            background: #111;
+            padding: 30px 50px;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        .page-footer a {
+            color: #ff0000;
+            text-decoration: none;
+        }
+
+        /* রেসপন্সিভ */
+        @media (max-width: 992px) {
+            .hero-content h1 { font-size: 56px; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .collection-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .page-header { padding: 15px 20px; }
+            .hero-content h1 { font-size: 42px; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .collection-card { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="back-home">
+            <span>←</span> BACK TO HOME
+        </a>
+        <div class="page-logo">CR7</div>
+    </header>
+
+    <section class="lifestyle-hero">
+        <div class="hero-content">
+            <div class="label">CR7 LIFESTYLE</div>
+            <h1>LIVE LIKE<br>A CHAMPION</h1>
+            <p>Discover the exclusive lifestyle collection that defines Cristiano Ronaldo's elegance, sophistication, and commitment to excellence both on and off the field.</p>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <div class="section-title">
+            <h2>LIFESTYLE MOMENTS</h2>
+            <p>A glimpse into the champion's world</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lifestyle">
+                <div class="gallery-overlay">
+                    <h3>ELEGANCE</h3>
+                    <p>Red carpet moments</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fitness">
+                <div class="gallery-overlay">
+                    <h3>FITNESS</h3>
+                    <p>Peak performance lifestyle</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Family">
+                <div class="gallery-overlay">
+                    <h3>FAMILY</h3>
+                    <p>Moments with loved ones</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="collection-section">
+        <div class="collection-grid">
+            <div class="collection-card">
+                <h3>FASHION</h3>
+                <p>Discover the CR7 fashion collection - from casual wear to formal elegance, each piece reflects the champion's style.</p>
+                <a href="#" class="collection-link">EXPLORE COLLECTION →</a>
+            </div>
+            <div class="collection-card">
+                <h3>WELLNESS</h3>
+                <p>Experience the fitness and wellness philosophy that keeps Cristiano at the peak of his performance.</p>
+                <a href="#" class="collection-link">LEARN MORE →</a>
+            </div>
+            <div class="collection-card">
+                <h3>TRAVEL</h3>
+                <p>Follow Cristiano's journeys around the world, from luxurious destinations to training camps.</p>
+                <a href="#" class="collection-link">DISCOVER →</a>
+            </div>
+            <div class="collection-card">
+                <h3>EXCLUSIVE</h3>
+                <p>Access limited edition lifestyle products and experiences curated by Cristiano himself.</p>
+                <a href="#" class="collection-link">VIEW NOW →</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="page-footer">
+        <p>© 2024 CR7 - Cristiano Ronaldo. All Rights Reserved. <a href="index.html">Return to Home</a></p>
+    </footer>
+</body>
+</html>

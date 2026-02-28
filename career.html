@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CR7 Career Highlights - Cristiano Ronaldo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .page-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+        }
+
+        .back-home {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s;
+        }
+
+        .back-home:hover {
+            color: #ff0000;
+        }
+
+        .back-home span {
+            font-size: 20px;
+        }
+
+        .page-logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #fff;
+            text-decoration: none;
+            border: 2px solid #ff0000;
+            padding: 5px 12px;
+        }
+
+        .career-hero {
+            height: 100vh;
+            background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%), url('https://images.unsplash.com/photo-1566577739112-5180d4bf9390?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 10%;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content .label {
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-content .label::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -10px;
+            width: 30px;
+            height: 2px;
+            background: #ff0000;
+            transform: translateY(-50%);
+        }
+
+        .hero-content h1 {
+            font-size: 82px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .timeline-section {
+            padding: 100px 50px;
+            background: #000;
+        }
+
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #ff0000, #ff0000, transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-year {
+            width: 120px;
+            height: 120px;
+            background: #111;
+            border: 2px solid #ff0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 800;
+            color: #ff0000;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 30px rgba(255,0,0,0.3);
+        }
+
+        .timeline-content {
+            width: calc(50% - 80px);
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #222;
+            padding: 40px;
+            transition: all 0.3s;
+        }
+
+        .timeline-content:hover {
+            border-color: #ff0000;
+            transform: translateY(-5px);
+        }
+
+        .timeline-content h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ff0000;
+        }
+
+        .timeline-content p {
+            color: #aaa;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .achievements-section {
+            padding: 80px 50px;
+            background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .achievement-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #222;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .achievement-card:hover {
+            border-color: #ff0000;
+            transform: translateY(-10px);
+        }
+
+        .achievement-icon {
+            font-size: 48px;
+            font-weight: 800;
+            color: #ff0000;
+            margin-bottom: 20px;
+        }
+
+        .achievement-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .achievement-label {
+            color: #888;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .page-footer {
+            background: #111;
+            padding: 30px 50px;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        .page-footer a {
+            color: #ff0000;
+            text-decoration: none;
+        }
+
+        @media (max-width: 992px) {
+            .hero-content h1 { font-size: 56px; }
+            .timeline-container::before { left: 30px; }
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: row;
+            }
+            .timeline-year { 
+                width: 80px; 
+                height: 80px; 
+                font-size: 24px; 
+                margin-right: 30px;
+            }
+            .timeline-content { width: calc(100% - 110px); }
+            .achievements-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .page-header { padding: 15px 20px; }
+            .hero-content h1 { font-size: 42px; }
+            .timeline-item { flex-direction: column !important; align-items: flex-start; }
+            .timeline-year { margin-bottom: 20px; }
+            .timeline-content { width: 100%; }
+            .achievements-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="back-home">
+            <span>←</span> BACK TO HOME
+        </a>
+        <div class="page-logo">CR7</div>
+    </header>
+
+    <section class="career-hero">
+        <div class="hero-content">
+            <div class="label">CAREER HIGHLIGHTS</div>
+            <h1>THE GREATEST<br>OF ALL TIME</h1>
+            <p>A journey through the remarkable career of Cristiano Ronaldo - from Madeira to becoming a global football icon.</p>
+        </div>
+    </section>
+
+    <section class="timeline-section">
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-year">2003</div>
+                <div class="timeline-content">
+                    <h3>Manchester United</h3>
+                    <p>Signed with Manchester United at age 18. Won his first Premier League title in 2007 and the Champions League in 2008.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2008</div>
+                <div class="timeline-content">
+                    <h3>First Ballon d'Or</h3>
+                    <p>Won his first Ballon d'Or after scoring 42 goals in all competitions and winning the Premier League and Champions League.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2009</div>
+                <div class="timeline-content">
+                    <h3>Real Madrid</h3>
+                    <p>Joined Real Madrid for a then-world record transfer fee. Became the club's all-time leading goalscorer.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2014</div>
+                <div class="timeline-content">
+                    <h3>La Decima</h3>
+                    <p>Won the Champions League with Real Madrid, scoring a record 17 goals in the competition.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2016</div>
+                <div class="timeline-content">
+                    <h3>Euro 2016 Champion</h3>
+                    <p>Led Portugal to their first major international trophy, winning the European Championship.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2018</div>
+                <div class="timeline-content">
+                    <h3>Juventus & 5th UCL</h3>
+                    <p>Joined Juventus, winning Serie A and claiming his 5th Champions League title.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2021</div>
+                <div class="timeline-content">
+                    <h3>Return to United</h3>
+                    <p>Made emotional return to Manchester United, scoring 24 goals in his first season back.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2023</div>
+                <div class="timeline-content">
+                    <h3>Al Nassr & 850+ Goals</h3>
+                    <p>Continues his legendary career in Saudi Arabia while surpassing 850 career goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="achievements-section">
+        <div class="achievements-grid">
+            <div class="achievement-card">
+                <div class="achievement-icon">🏆</div>
+                <div class="achievement-number">5</div>
+                <div class="achievement-label">Ballon d'Or</div>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">🏆</div>
+                <div class="achievement-number">5</div>
+                <div class="achievement-label">Champions League</div>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">⚽</div>
+                <div class="achievement-number">850+</div>
+                <div class="achievement-label">Career Goals</div>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">🏆</div>
+                <div class="achievement-number">34</div>
+                <div class="achievement-label">Trophies Won</div>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">⭐</div>
+                <div class="achievement-number">7</div>
+                <div class="achievement-label">League Titles</div>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">⚽</div>
+                <div class="achievement-number">140+</div>
+                <div class="achievement-label">UCL Goals</div>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">🏆</div>
+                <div class="achievement-number">4</div>
+                <div class="achievement-label">Club World Cup</div>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">🇵🇹</div>
+                <div class="achievement-number">2</div>
+                <div class="achievement-label">Int'l Trophies</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="page-footer">
+        <p>© 2024 CR7 - Cristiano Ronaldo. All Rights Reserved. <a href="index.html">Return to Home</a></p>
+    </footer>
+</body>
+</html>
