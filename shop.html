@@ -76,13 +76,19 @@
         }
 
         .logo {
-            font-size: 22px;
+            font-size: 28px;
             font-weight: 800;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             color: #fff;
             text-decoration: none;
             border: 2px solid #fff;
-            padding: 3px 8px;
+            padding: 5px 12px;
+            transition: all 0.3s;
+        }
+
+        .logo:hover {
+            background: #fff;
+            color: #000;
         }
 
         @media (min-width: 768px) {
@@ -1120,7 +1126,7 @@
             }
         }
 
-        .footer-logo {
+        /* .footer-logo {
             font-size: 32px;
             font-weight: 900;
             color: #fff;
@@ -1129,7 +1135,7 @@
             padding: 5px 15px;
             display: inline-block;
             margin-bottom: 15px;
-        }
+        } */
 
         .footer-about {
             color: #888;
@@ -1393,7 +1399,7 @@
     <footer class="premium-footer">
         <div class="footer-container">
             <div class="footer-col">
-                <a href="#" class="footer-logo" onclick="window.location.href='index.html'">kHp10</a>
+                <a href="#" class="logo" onclick="window.location.href='index.html'">kHp10</a>
                 <p class="footer-about">The official online store of Cristiano Ronaldo. Shop the latest kHp10 collections and exclusive merchandise.</p>
                 <div class="social-links">
                     <a href="#" class="social-link" onclick="openSocial('facebook')">FB</a>
