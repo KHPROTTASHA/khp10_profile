@@ -235,7 +235,7 @@
 
         .payment-options {
             display: flex;
-            gap: 20px;
+            gap: 10px;
             margin-bottom: 25px;
             flex-wrap: wrap;
         }
@@ -250,6 +250,7 @@
             background: #222;
             border: 1px solid #333;
             border-radius: 4px;
+            transition: all 0.3s;
         }
 
         .payment-option input[type="radio"] {
@@ -258,6 +259,11 @@
         }
 
         .payment-option.selected {
+            border-color: #ff0000;
+            background: #333;
+        }
+
+        .payment-option:hover {
             border-color: #ff0000;
         }
 
@@ -598,6 +604,18 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .mobile-fields {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #1a1a1a;
+            border-radius: 4px;
+        }
+
+        .mobile-fields.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -633,13 +651,17 @@
                         <div class="step" id="step3Indicator">3. Review</div>
                     </div>
 
-                    <!-- Step 1: Address -->
+                    <!-- Step 1: Address (email included) -->
                     <div class="step-content" id="step1Content">
                         <h3>Shipping Address</h3>
                         <form id="addressForm" onsubmit="event.preventDefault(); saveAddress();">
                             <div class="form-group">
                                 <label>Full Name</label>
                                 <input type="text" id="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" id="email" required>
                             </div>
                             <div class="form-group">
                                 <label>Address Line 1</label>
@@ -671,7 +693,7 @@
                         </form>
                     </div>
 
-                    <!-- Step 2: Payment -->
+                    <!-- Step 2: Payment (with bKash, Rocket, Nagad) -->
                     <div class="step-content" id="step2Content" style="display:none;">
                         <h3>Payment Method</h3>
                         <form id="paymentForm" onsubmit="event.preventDefault(); savePayment();">
@@ -683,29 +705,77 @@
                                     <input type="radio" name="paymentMethod" value="debit"> Debit Card
                                 </label>
                                 <label class="payment-option">
+                                    <input type="radio" name="paymentMethod" value="bkash"> bKash
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="paymentMethod" value="rocket"> Rocket
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="paymentMethod" value="nagad"> Nagad
+                                </label>
+                                <label class="payment-option">
                                     <input type="radio" name="paymentMethod" value="paypal"> PayPal
                                 </label>
                             </div>
+
+                            <!-- Credit/Debit Card Fields -->
                             <div id="creditCardFields">
                                 <div class="form-group">
                                     <label>Card Number</label>
-                                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label>Expiry Date</label>
-                                        <input type="text" id="expiry" placeholder="MM/YY" required>
+                                        <input type="text" id="expiry" placeholder="MM/YY">
                                     </div>
                                     <div class="form-group">
                                         <label>CVV</label>
-                                        <input type="text" id="cvv" placeholder="123" required>
+                                        <input type="text" id="cvv" placeholder="123">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Name on Card</label>
-                                    <input type="text" id="cardName" required>
+                                    <input type="text" id="cardName">
                                 </div>
                             </div>
+
+                            <!-- bKash Fields -->
+                            <div id="bkashFields" class="mobile-fields">
+                                <div class="form-group">
+                                    <label>bKash Mobile Number</label>
+                                    <input type="tel" id="bkashNumber" placeholder="01XXXXXXXXX">
+                                </div>
+                                <div class="form-group">
+                                    <label>Transaction ID</label>
+                                    <input type="text" id="bkashTrxID" placeholder="e.g., 8N7A5D9F">
+                                </div>
+                            </div>
+
+                            <!-- Rocket Fields -->
+                            <div id="rocketFields" class="mobile-fields">
+                                <div class="form-group">
+                                    <label>Rocket Mobile Number</label>
+                                    <input type="tel" id="rocketNumber" placeholder="01XXXXXXXXX">
+                                </div>
+                                <div class="form-group">
+                                    <label>Transaction ID</label>
+                                    <input type="text" id="rocketTrxID" placeholder="e.g., R8T6Y3U1">
+                                </div>
+                            </div>
+
+                            <!-- Nagad Fields -->
+                            <div id="nagadFields" class="mobile-fields">
+                                <div class="form-group">
+                                    <label>Nagad Mobile Number</label>
+                                    <input type="tel" id="nagadNumber" placeholder="01XXXXXXXXX">
+                                </div>
+                                <div class="form-group">
+                                    <label>Transaction ID</label>
+                                    <input type="text" id="nagadTrxID" placeholder="e.g., N5K2L7M9">
+                                </div>
+                            </div>
+
                             <button type="submit" class="continue-btn">Continue to Review</button>
                         </form>
                     </div>
@@ -737,7 +807,7 @@
                         <button class="place-order-btn" onclick="placeOrder()">Place Your Order</button>
                     </div>
 
-                    <!-- Step 4: Confirmation (hidden until order placed) -->
+                    <!-- Step 4: Confirmation -->
                     <div class="step-content" id="step4Content" style="display:none;">
                         <div class="order-confirmation">
                             <div class="success-icon">✓</div>
@@ -819,58 +889,71 @@
     </footer>
 
     <div class="notification" id="notification">
-        <p id="notificationMessage">Item added to cart!</p>
+        <p id="notificationMessage"></p>
     </div>
 
     <script>
-        // Load cart from localStorage
+        // -------------------- গ্লোবাল ভেরিয়েবল --------------------
         let cart = [];
         try {
             const savedCart = localStorage.getItem('cr7_cart');
-            if (savedCart) {
-                cart = JSON.parse(savedCart);
-            }
+            if (savedCart) cart = JSON.parse(savedCart);
         } catch (e) {
-            console.error('Failed to load cart');
+            console.error('কার্ট লোড করতে সমস্যা');
         }
 
         let addressInfo = null;
         let paymentInfo = null;
 
+        // -------------------- উইন্ডো লোড ইভেন্ট --------------------
         window.onload = function() {
             updateCheckoutSummary();
             setupEventListeners();
         };
 
+        // -------------------- ইভেন্ট লিসেনার সেটআপ --------------------
         function setupEventListeners() {
             window.addEventListener('scroll', () => {
                 document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 50);
             });
 
-            // Payment method toggle
+            // পেমেন্ট মেথড পরিবর্তন হলে সংশ্লিষ্ট ফিল্ড দেখাও/লুকাও
             const paymentRadios = document.querySelectorAll('input[name="paymentMethod"]');
             paymentRadios.forEach(radio => {
                 radio.addEventListener('change', function() {
-                    const creditFields = document.getElementById('creditCardFields');
-                    if (this.value === 'paypal') {
-                        creditFields.style.display = 'none';
+                    document.querySelectorAll('.mobile-fields').forEach(el => el.classList.remove('active'));
+                    document.getElementById('creditCardFields').style.display = 'block';
+
+                    const val = this.value;
+                    if (val === 'bkash') {
+                        document.getElementById('creditCardFields').style.display = 'none';
+                        document.getElementById('bkashFields').classList.add('active');
+                    } else if (val === 'rocket') {
+                        document.getElementById('creditCardFields').style.display = 'none';
+                        document.getElementById('rocketFields').classList.add('active');
+                    } else if (val === 'nagad') {
+                        document.getElementById('creditCardFields').style.display = 'none';
+                        document.getElementById('nagadFields').classList.add('active');
+                    } else if (val === 'paypal') {
+                        document.getElementById('creditCardFields').style.display = 'none';
                     } else {
-                        creditFields.style.display = 'block';
+                        document.getElementById('creditCardFields').style.display = 'block';
                     }
                 });
             });
         }
 
+        // -------------------- স্টেপ নেভিগেশন --------------------
         function showStep(step) {
             document.getElementById('step1Content').style.display = 'none';
             document.getElementById('step2Content').style.display = 'none';
             document.getElementById('step3Content').style.display = 'none';
             document.getElementById('step4Content').style.display = 'none';
-            
+
             document.getElementById('step1Indicator').classList.remove('active');
             document.getElementById('step2Indicator').classList.remove('active');
             document.getElementById('step3Indicator').classList.remove('active');
-            
+
             if (step === 1) {
                 document.getElementById('step1Content').style.display = 'block';
                 document.getElementById('step1Indicator').classList.add('active');
@@ -884,26 +967,28 @@
             } else if (step === 4) {
                 document.getElementById('step4Content').style.display = 'block';
                 document.getElementById('orderId').textContent = 'CR7-' + Math.floor(Math.random() * 1000000);
-                // Clear cart from localStorage after order placed
-                localStorage.removeItem('cr7_cart');
+                localStorage.removeItem('cr7_cart'); // অর্ডার দেওয়ার পর কার্ট খালি
             }
         }
 
+        // -------------------- অ্যাড্রেস সেভ --------------------
         function saveAddress() {
             const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
             const addressLine1 = document.getElementById('addressLine1').value.trim();
             const city = document.getElementById('city').value.trim();
             const state = document.getElementById('state').value.trim();
             const zip = document.getElementById('zip').value.trim();
             const phone = document.getElementById('phone').value.trim();
-            
-            if (!fullName || !addressLine1 || !city || !state || !zip || !phone) {
-                showNotification('Please fill all required fields');
+
+            if (!fullName || !email || !addressLine1 || !city || !state || !zip || !phone) {
+                showNotification('সব ঘর পূরণ করুন');
                 return;
             }
-            
+
             addressInfo = {
                 fullName,
+                email,
                 addressLine1,
                 addressLine2: document.getElementById('addressLine2').value.trim(),
                 city,
@@ -911,51 +996,108 @@
                 zip,
                 phone
             };
-            
+
             showStep(2);
         }
 
+        // -------------------- পেমেন্ট সেভ --------------------
         function savePayment() {
             const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-            
+
             if (paymentMethod === 'credit' || paymentMethod === 'debit') {
                 const cardNumber = document.getElementById('cardNumber').value.trim();
                 const expiry = document.getElementById('expiry').value.trim();
                 const cvv = document.getElementById('cvv').value.trim();
                 const cardName = document.getElementById('cardName').value.trim();
-                
+
                 if (!cardNumber || !expiry || !cvv || !cardName) {
-                    showNotification('Please fill all card details');
-                    return false;
+                    showNotification('কার্ডের সব তথ্য দিন');
+                    return;
                 }
-                // Simple validation - could add regex
+                if (cardNumber.replace(/\s/g, '').length < 13) {
+                    showNotification('কার্ড নম্বর সঠিক নয়');
+                    return;
+                }
+                if (!/^\d{2}\/\d{2}$/.test(expiry)) {
+                    showNotification('মেয়াদ MM/YY ফরম্যাটে দিন');
+                    return;
+                }
+                if (cvv.length < 3) {
+                    showNotification('CVV সঠিক নয়');
+                    return;
+                }
                 paymentInfo = {
                     method: paymentMethod === 'credit' ? 'Credit Card' : 'Debit Card',
                     cardNumber: cardNumber.slice(-4),
                     cardName
                 };
-            } else {
+            } 
+            else if (paymentMethod === 'bkash') {
+                const number = document.getElementById('bkashNumber').value.trim();
+                const trxID = document.getElementById('bkashTrxID').value.trim();
+                if (!number || !trxID) {
+                    showNotification('বিকাশ নম্বর ও ট্রাঞ্জেকশন আইডি দিন');
+                    return;
+                }
+                if (!/^01\d{9}$/.test(number)) {
+                    showNotification('১১ ডিজিটের বৈধ নম্বর দিন');
+                    return;
+                }
+                paymentInfo = { method: 'bKash', number: number.slice(-4), trxID };
+            }
+            else if (paymentMethod === 'rocket') {
+                const number = document.getElementById('rocketNumber').value.trim();
+                const trxID = document.getElementById('rocketTrxID').value.trim();
+                if (!number || !trxID) {
+                    showNotification('রকেট নম্বর ও ট্রাঞ্জেকশন আইডি দিন');
+                    return;
+                }
+                if (!/^01\d{9}$/.test(number)) {
+                    showNotification('১১ ডিজিটের বৈধ নম্বর দিন');
+                    return;
+                }
+                paymentInfo = { method: 'Rocket', number: number.slice(-4), trxID };
+            }
+            else if (paymentMethod === 'nagad') {
+                const number = document.getElementById('nagadNumber').value.trim();
+                const trxID = document.getElementById('nagadTrxID').value.trim();
+                if (!number || !trxID) {
+                    showNotification('নগদ নম্বর ও ট্রাঞ্জেকশন আইডি দিন');
+                    return;
+                }
+                if (!/^01\d{9}$/.test(number)) {
+                    showNotification('১১ ডিজিটের বৈধ নম্বর দিন');
+                    return;
+                }
+                paymentInfo = { method: 'Nagad', number: number.slice(-4), trxID };
+            }
+            else if (paymentMethod === 'paypal') {
                 paymentInfo = { method: 'PayPal' };
             }
-            
+
             showStep(3);
         }
 
+        // -------------------- রিভিউ পপুলেট --------------------
         function populateReview() {
-            // Address
+            // অ্যাড্রেস
             document.getElementById('reviewAddress').innerHTML = `
                 ${addressInfo.fullName}<br>
+                ${addressInfo.email}<br>
                 ${addressInfo.addressLine1}<br>
                 ${addressInfo.addressLine2 ? addressInfo.addressLine2 + '<br>' : ''}
                 ${addressInfo.city}, ${addressInfo.state} ${addressInfo.zip}<br>
                 Phone: ${addressInfo.phone}
             `;
-            
-            // Payment
-            document.getElementById('reviewPayment').innerHTML = paymentInfo.method + 
-                (paymentInfo.cardNumber ? ` ending in ${paymentInfo.cardNumber}` : '');
-            
-            // Items
+
+            // পেমেন্ট
+            let paymentText = paymentInfo.method;
+            if (paymentInfo.cardNumber) paymentText += ` ending in ${paymentInfo.cardNumber}`;
+            if (paymentInfo.number) paymentText += ` (****${paymentInfo.number})`;
+            if (paymentInfo.trxID) paymentText += ` | Trx: ${paymentInfo.trxID}`;
+            document.getElementById('reviewPayment').innerHTML = paymentText;
+
+            // আইটেম
             const reviewItems = document.getElementById('reviewItems');
             let itemsHtml = '';
             cart.forEach(item => {
@@ -971,26 +1113,71 @@
                 `;
             });
             reviewItems.innerHTML = itemsHtml;
-            
-            // Totals
+
+            // টোটাল
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const tax = subtotal * 0.08;
             const total = subtotal + 5.99 + tax;
-            
+
             document.getElementById('reviewSubtotal').textContent = '$' + subtotal.toFixed(2);
             document.getElementById('reviewTax').textContent = '$' + tax.toFixed(2);
             document.getElementById('reviewTotal').textContent = '$' + total.toFixed(2);
         }
 
+        // -------------------- অর্ডার প্লেস ও ব্যাকএন্ডে পাঠানো --------------------
         function placeOrder() {
-            // Simulate order placement
-            showStep(4);
+            const orderNumber = 'CR7-' + Date.now(); // ইউনিক অর্ডার নম্বর
+
+            const orderData = {
+                orderNumber: orderNumber,
+                fullName: addressInfo.fullName,
+                email: addressInfo.email,
+                phone: addressInfo.phone,
+                address: `${addressInfo.addressLine1} ${addressInfo.addressLine2}`.trim(),
+                city: addressInfo.city,
+                state: addressInfo.state,
+                zip: addressInfo.zip,
+                paymentMethod: paymentInfo.method,
+                total: calculateTotal()
+            };
+
+            // এখানে আপনার ব্যাকএন্ড URL দিন (যেমন: http://localhost:5000/api/orders)
+            const backendUrl = 'http://localhost:5000/api/orders'; // পরিবর্তন করুন
+
+            fetch(backendUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    showNotification('অর্ডার সংরক্ষণে সমস্যা: ' + data.error);
+                } else {
+                    showStep(4);
+                    document.getElementById('orderId').textContent = orderNumber;
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                showNotification('সার্ভারে সংযোগ ব্যর্থ, তবে অর্ডার গৃহীত হয়েছে (ডেমো)');
+                // ডেমোতে দেখানোর জন্য পরবর্তী ধাপ দেখিয়ে দিন
+                showStep(4);
+                document.getElementById('orderId').textContent = orderNumber;
+            });
         }
 
+        function calculateTotal() {
+            const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const tax = subtotal * 0.08;
+            return subtotal + 5.99 + tax;
+        }
+
+        // -------------------- সাইডবার আপডেট --------------------
         function updateCheckoutSummary() {
             const container = document.getElementById('checkoutCartItems');
             if (!container) return;
-            
+
             if (cart.length === 0) {
                 container.innerHTML = '<p style="color:#888; text-align:center;">Your cart is empty</p>';
                 document.getElementById('checkoutSubtotal').textContent = '$0.00';
@@ -998,10 +1185,9 @@
                 document.getElementById('checkoutTotal').textContent = '$0.00';
                 return;
             }
-            
+
             let html = '';
             let subtotal = 0;
-            
             cart.forEach(item => {
                 subtotal += item.price * item.quantity;
                 html += `
@@ -1016,15 +1202,16 @@
                 `;
             });
             container.innerHTML = html;
-            
+
             const tax = subtotal * 0.08;
             const total = subtotal + 5.99 + tax;
-            
+
             document.getElementById('checkoutSubtotal').textContent = '$' + subtotal.toFixed(2);
             document.getElementById('checkoutTax').textContent = '$' + tax.toFixed(2);
             document.getElementById('checkoutTotal').textContent = '$' + total.toFixed(2);
         }
 
+        // ----------------------- নোটিফিকেশন -------------------------
         function showNotification(msg) {
             const n = document.getElementById('notification');
             const messageEl = document.getElementById('notificationMessage');
@@ -1035,6 +1222,7 @@
             }
         }
 
+        // -------------------- হেল্পার ফাংশন (ফুটার/হেডার) --------------------
         function openSocial(p) { showNotification(`Opening ${p}`); }
         function openPage(p) { showNotification(`Opening ${p} page`); }
         function openLogin() { showNotification('Login coming soon!'); }
