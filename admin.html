@@ -22,6 +22,27 @@
             overflow-x: hidden;
         }
 
+        /* Premium Logo Style for Login */
+        .login-logo {
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            color: #fff;
+            text-decoration: none;
+            border: 2px solid transparent;
+            padding: 8px 16px;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(45deg, #fff, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-image: linear-gradient(45deg, #ffd700, #ff0000) 1;
+            border-style: solid;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
         .top-bar {
             position: fixed;
             top: 0;
@@ -252,12 +273,12 @@
             max-width: 400px;
             width: 90%;
             box-shadow: 0 30px 60px rgba(255,0,0,0.3);
+            text-align: center;
         }
 
         .login-card h2 {
             font-size: 24px;
             margin-bottom: 20px;
-            text-align: center;
             color: #ff0000;
         }
 
@@ -410,6 +431,11 @@
         textarea {
             resize: vertical;
             min-height: 100px;
+        }
+
+        /* New video field */
+        .video-group {
+            margin-bottom: 20px;
         }
 
         .images-container {
@@ -760,6 +786,7 @@
     <!-- Login Overlay -->
     <div id="loginOverlay" class="login-overlay">
         <div class="login-card">
+            <div class="login-logo">kHp100</div>
             <h2>ADMIN LOGIN</h2>
             <input type="text" id="username" placeholder="Username" value="admin">
             <input type="password" id="password" placeholder="Password" value="admin123">
@@ -844,6 +871,12 @@
                     <div class="form-group">
                         <label>DESCRIPTION</label>
                         <textarea id="description" placeholder="Product description..." required></textarea>
+                    </div>
+
+                    <!-- NEW: Video URL (optional) -->
+                    <div class="video-group">
+                        <label>VIDEO URL (optional)</label>
+                        <input type="url" id="video" placeholder="https://youtube.com/embed/... or direct video file">
                     </div>
 
                     <!-- Dynamic image URLs -->
@@ -1036,6 +1069,7 @@
             if (data.stock) document.getElementById('stock').value = data.stock;
             if (data.badge) document.getElementById('badge').value = data.badge;
             if (data.description) document.getElementById('description').value = data.description;
+            if (data.video) document.getElementById('video').value = data.video;  // NEW
 
             // Handle images: if provided, replace image rows
             if (data.images && Array.isArray(data.images) && data.images.length > 0) {
@@ -1104,6 +1138,7 @@
                 stock: parseInt(document.getElementById('stock').value),
                 badge: document.getElementById('badge').value.trim() || null,
                 description: document.getElementById('description').value.trim(),
+                video: document.getElementById('video').value.trim() || null,  // NEW
                 images: images
             };
 
