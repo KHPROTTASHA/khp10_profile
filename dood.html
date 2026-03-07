@@ -541,82 +541,6 @@
             margin-bottom: 20px;
         }
 
-        /* Product List Styles (NEW) */
-        .product-list-section {
-            margin-top: 60px;
-            border-top: 2px solid #ff0000;
-            padding-top: 30px;
-        }
-        .product-list-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .product-list-item {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            transition: border-color 0.3s;
-        }
-        .product-list-item:hover {
-            border-color: #ff0000;
-        }
-        .product-list-item img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            background: #000;
-        }
-        .product-list-item h4 {
-            font-size: 14px;
-            font-weight: 600;
-            margin: 5px 0 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .product-list-item .price {
-            font-size: 13px;
-            color: #ff0000;
-            font-weight: 600;
-        }
-        .product-list-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 5px;
-        }
-        .product-list-actions button {
-            flex: 1;
-            padding: 6px;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s;
-        }
-        .edit-btn {
-            background: transparent;
-            border: 1px solid #ffd700;
-            color: #ffd700;
-        }
-        .edit-btn:hover {
-            background: #ffd700;
-            color: #000;
-        }
-        .delete-btn {
-            background: transparent;
-            border: 1px solid #ff0000;
-            color: #ff0000;
-        }
-        .delete-btn:hover {
-            background: #ff0000;
-            color: #fff;
-        }
-
         /* Footer (same as main) */
         .premium-footer {
             background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
@@ -876,7 +800,7 @@
         <div class="admin-container">
             <div class="admin-card">
                 <div class="admin-header">
-                    <h1 class="admin-title" id="formTitle">ADD NEW PRODUCT</h1>
+                    <h1 class="admin-title">ADD NEW PRODUCT</h1>
                     <button class="logout-btn" onclick="logout()">LOGOUT</button>
                 </div>
                 <div class="admin-subtitle">Fill manually or scan a QR code</div>
@@ -949,7 +873,7 @@
                         <textarea id="description" placeholder="Product description..." required></textarea>
                     </div>
 
-                    <!-- Video URL (optional) -->
+                    <!-- NEW: Video URL (optional) -->
                     <div class="video-group">
                         <label>VIDEO URL (optional)</label>
                         <input type="url" id="video" placeholder="https://youtube.com/embed/... or direct video file">
@@ -970,17 +894,8 @@
                         <small style="color: #888; display: block; margin-top: 8px;">You can add up to 4 images</small>
                     </div>
 
-                    <button type="submit" class="submit-btn" id="submitBtn">ADD PRODUCT</button>
-                    <button type="button" class="submit-btn" id="cancelEditBtn" style="background:transparent; color:#ff0000; border-color:#ff0000; margin-top:10px; display:none;" onclick="resetForm()">CANCEL EDIT</button>
+                    <button type="submit" class="submit-btn">ADD PRODUCT</button>
                 </form>
-
-                <!-- Product List Section (NEW) -->
-                <div class="product-list-section">
-                    <h2 class="admin-title" style="font-size: 24px; margin-bottom: 20px;">MANAGE PRODUCTS</h2>
-                    <div id="productListContainer" class="product-list-container">
-                        <p style="color:#888; text-align:center;">Loading products...</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -1073,17 +988,18 @@
 
         // ========== LOGIN SYSTEM ==========
         const ADMIN_USERNAME = 'admin';
-        const ADMIN_PASSWORD = 'admin123';
+        const ADMIN_PASSWORD = 'admin123'; // Change as needed
 
         function handleLogin() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                // Hide login overlay, show admin panel
                 document.getElementById('loginOverlay').classList.add('hidden');
                 document.getElementById('adminPanel').style.display = 'block';
+                // Store login state
                 sessionStorage.setItem('adminLoggedIn', 'true');
                 showNotification('Login successful');
-                loadProducts(); // Load product list after login
             } else {
                 document.getElementById('loginError').innerText = 'Invalid username or password';
             }
@@ -1093,6 +1009,7 @@
             sessionStorage.removeItem('adminLoggedIn');
             document.getElementById('loginOverlay').classList.remove('hidden');
             document.getElementById('adminPanel').style.display = 'none';
+            // Stop scanner if running
             if (html5QrCode) {
                 html5QrCode.stop().then(() => {
                     document.getElementById('qr-reader').classList.remove('active');
@@ -1105,7 +1022,6 @@
             if (sessionStorage.getItem('adminLoggedIn') === 'true') {
                 document.getElementById('loginOverlay').classList.add('hidden');
                 document.getElementById('adminPanel').style.display = 'block';
-                loadProducts();
             }
         };
 
@@ -1120,9 +1036,10 @@
             const qrConfig = { fps: 10, qrbox: { width: 250, height: 250 } };
 
             html5QrCode.start(
-                { facingMode: "environment" },
+                { facingMode: "environment" }, // use back camera
                 qrConfig,
                 (decodedText) => {
+                    // Success callback
                     html5QrCode.stop();
                     qrReader.classList.remove('active');
                     try {
@@ -1133,13 +1050,16 @@
                         showNotification('Invalid QR format. Expected JSON.');
                     }
                 },
-                (errorMessage) => { /* ignore */ }
+                (errorMessage) => {
+                    // Ignore errors, just keep scanning
+                }
             ).catch(err => {
                 showNotification('Camera error: ' + err);
             });
         }
 
         function fillFormFromQR(data) {
+            // Map expected JSON keys to form fields
             if (data.name) document.getElementById('name').value = data.name;
             if (data.category) document.getElementById('category').value = data.category;
             if (data.price) document.getElementById('price').value = data.price;
@@ -1149,12 +1069,13 @@
             if (data.stock) document.getElementById('stock').value = data.stock;
             if (data.badge) document.getElementById('badge').value = data.badge;
             if (data.description) document.getElementById('description').value = data.description;
-            if (data.video) document.getElementById('video').value = data.video;
+            if (data.video) document.getElementById('video').value = data.video;  // NEW
 
+            // Handle images: if provided, replace image rows
             if (data.images && Array.isArray(data.images) && data.images.length > 0) {
                 const container = document.getElementById('imageRows');
-                container.innerHTML = '';
-                data.images.forEach((url) => {
+                container.innerHTML = ''; // clear existing
+                data.images.forEach((url, index) => {
                     const row = document.createElement('div');
                     row.className = 'image-row';
                     row.innerHTML = `
@@ -1195,119 +1116,6 @@
             }
         }
 
-        // ========== PRODUCT LIST MANAGEMENT ==========
-        let editingProductId = null;
-
-        async function loadProducts() {
-            try {
-                const response = await fetch('http://localhost:3000/api/products');
-                const products = await response.json();
-                renderProductList(products);
-            } catch (err) {
-                document.getElementById('productListContainer').innerHTML = '<p style="color:#ff0000; text-align:center;">Failed to load products. Is the backend running?</p>';
-            }
-        }
-
-        function renderProductList(products) {
-            const container = document.getElementById('productListContainer');
-            if (products.length === 0) {
-                container.innerHTML = '<p style="color:#888; text-align:center;">No products yet. Add one above.</p>';
-                return;
-            }
-
-            let html = '';
-            products.forEach(product => {
-                html += `
-                    <div class="product-list-item">
-                        <img src="${product.images?.[0] || 'https://via.placeholder.com/200x120?text=No+Image'}" alt="${product.name}">
-                        <h4>${product.name}</h4>
-                        <div class="price">$${product.price}</div>
-                        <div class="product-list-actions">
-                            <button class="edit-btn" onclick="editProduct(${product.id})">✎ EDIT</button>
-                            <button class="delete-btn" onclick="deleteProduct(${product.id})">🗑 DELETE</button>
-                        </div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-        }
-
-        async function editProduct(id) {
-            try {
-                const response = await fetch(`http://localhost:3000/api/products/${id}`);
-                const product = await response.json();
-
-                document.getElementById('name').value = product.name || '';
-                document.getElementById('category').value = product.category || '';
-                document.getElementById('price').value = product.price || '';
-                document.getElementById('oldPrice').value = product.oldPrice || '';
-                document.getElementById('rating').value = product.rating || 5;
-                document.getElementById('reviews').value = product.reviews || 0;
-                document.getElementById('stock').value = product.stock || 0;
-                document.getElementById('badge').value = product.badge || '';
-                document.getElementById('description').value = product.description || '';
-                document.getElementById('video').value = product.video || '';
-
-                const imageRows = document.getElementById('imageRows');
-                imageRows.innerHTML = '';
-                if (product.images && product.images.length > 0) {
-                    product.images.forEach(url => {
-                        const row = document.createElement('div');
-                        row.className = 'image-row';
-                        row.innerHTML = `
-                            <input type="url" class="image-input" value="${url}" placeholder="https://example.com/image.jpg" required>
-                            <button type="button" class="remove-image-btn" onclick="removeImageRow(this)">×</button>
-                        `;
-                        imageRows.appendChild(row);
-                    });
-                } else {
-                    addImageRow();
-                }
-
-                editingProductId = product.id;
-                document.getElementById('formTitle').textContent = 'EDIT PRODUCT';
-                document.getElementById('submitBtn').textContent = 'UPDATE PRODUCT';
-                document.getElementById('cancelEditBtn').style.display = 'block';
-
-                document.querySelector('.admin-card').scrollIntoView({ behavior: 'smooth' });
-            } catch (err) {
-                showNotification('Error loading product details');
-            }
-        }
-
-        function resetForm() {
-            document.getElementById('productForm').reset();
-            document.getElementById('imageRows').innerHTML = `
-                <div class="image-row">
-                    <input type="url" class="image-input" placeholder="https://example.com/image1.jpg" required>
-                    <button type="button" class="remove-image-btn" onclick="removeImageRow(this)">×</button>
-                </div>
-            `;
-            editingProductId = null;
-            document.getElementById('formTitle').textContent = 'ADD NEW PRODUCT';
-            document.getElementById('submitBtn').textContent = 'ADD PRODUCT';
-            document.getElementById('cancelEditBtn').style.display = 'none';
-        }
-
-        async function deleteProduct(id) {
-            if (!confirm('Are you sure you want to delete this product?')) return;
-
-            try {
-                const response = await fetch(`http://localhost:3000/api/products/${id}`, {
-                    method: 'DELETE'
-                });
-                if (response.ok) {
-                    showNotification('Product deleted');
-                    loadProducts();
-                    if (editingProductId === id) resetForm();
-                } else {
-                    showNotification('Failed to delete product');
-                }
-            } catch (err) {
-                showNotification('Error connecting to server');
-            }
-        }
-
         // ========== FORM SUBMISSION ==========
         document.getElementById('productForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -1330,27 +1138,27 @@
                 stock: parseInt(document.getElementById('stock').value),
                 badge: document.getElementById('badge').value.trim() || null,
                 description: document.getElementById('description').value.trim(),
-                video: document.getElementById('video').value.trim() || null,
+                video: document.getElementById('video').value.trim() || null,  // NEW
                 images: images
             };
 
-            const url = editingProductId
-                ? `http://localhost:3000/api/products/${editingProductId}`
-                : 'http://localhost:3000/api/products';
-
-            const method = editingProductId ? 'PUT' : 'POST';
-
             try {
-                const response = await fetch(url, {
-                    method: method,
+                const response = await fetch('http://localhost:3000/api/products', {
+                    method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(product)
                 });
 
                 if (response.ok) {
-                    showNotification(editingProductId ? 'Product updated!' : 'Product added!');
-                    resetForm();
-                    loadProducts();
+                    showNotification('Product added successfully!');
+                    document.getElementById('productForm').reset();
+                    // Reset to one empty image row
+                    document.getElementById('imageRows').innerHTML = `
+                        <div class="image-row">
+                            <input type="url" class="image-input" placeholder="https://example.com/image1.jpg" required>
+                            <button type="button" class="remove-image-btn" onclick="removeImageRow(this)">×</button>
+                        </div>
+                    `;
                 } else {
                     const err = await response.text();
                     showNotification('Error: ' + err);
@@ -1359,8 +1167,6 @@
                 showNotification('Failed to connect to server. Is the backend running?');
             }
         });
-
-        document.getElementById('cancelEditBtn').addEventListener('click', resetForm);
 
         // Header scroll effect
         window.addEventListener('scroll', () => {

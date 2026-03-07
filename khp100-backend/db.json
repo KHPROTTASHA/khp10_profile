@@ -1,0 +1,175 @@
+{
+  "products": [
+    {
+      "id": 1772616674473,
+      "name": "lol",
+      "category": "fragrances",
+      "price": 20,
+      "oldPrice": 25,
+      "rating": 5,
+      "reviews": 10,
+      "stock": 10,
+      "badge": "new",
+      "description": "jack maa",
+      "video": "https://www.youtube.com/results?search_query=vocabulary+english+to+bangla",
+      "images": [
+        "https://www.youtube.com/results?search_query=vocabulary+english+to+bangla"
+      ]
+    },
+    {
+      "id": 1772864877105,
+      "name": "lol",
+      "category": "fragrances",
+      "price": 100,
+      "oldPrice": 120,
+      "rating": 5,
+      "reviews": 0,
+      "stock": 10,
+      "badge": null,
+      "description": "MMMMMMMHHHHHHHKKKKKKKKKKKYYYYYYYYYYY",
+      "video": "https://www.youtube.com/results?search_query=vocabulary+english+to+bangla",
+      "images": [
+        "https://www.youtube.com/results?search_query=vocabulary+english+to+bangla"
+      ]
+    },
+    {
+      "id": 1772865185608,
+      "name": "lol",
+      "category": "fragrances",
+      "price": 10,
+      "oldPrice": 12,
+      "rating": 5,
+      "reviews": 0,
+      "stock": 10,
+      "badge": null,
+      "description": "LLLLLLLLLLLLLLLKKKKKKKKKK",
+      "video": "https://www.youtube.com/results?search_query=vocabulary+english+to+bangla",
+      "images": [
+        "https://www.youtube.com/results?search_query=vocabulary+english+to+bangla"
+      ]
+    },
+    {
+      "id": 1772865539071,
+      "name": "lol",
+      "category": "fragrances",
+      "price": 0.03,
+      "oldPrice": 0.06,
+      "rating": 5,
+      "reviews": 0,
+      "stock": 10,
+      "badge": null,
+      "description": "MMMMMMMMMMMMMMM",
+      "video": "https://www.youtube.com/results?search_query=vocabulary+english+to+bangla",
+      "images": [
+        "https://www.youtube.com/results?search_query=vocabulary+english+to+bangla"
+      ]
+    },
+    {
+      "id": 1772866206414,
+      "name": "lol",
+      "category": "footwear",
+      "price": 12,
+      "oldPrice": 13,
+      "rating": 5,
+      "reviews": 0,
+      "stock": 10,
+      "badge": null,
+      "description": "MKKKMKKKMKKMKMKKM",
+      "video": "https://www.youtube.com/watch?v=a40v9kBz71c",
+      "images": [
+        "https://www.youtube.com/watch?v=a40v9kBz71c"
+      ]
+    },
+    {
+      "id": 1772866298083,
+      "name": "lol1",
+      "category": "footwear",
+      "price": 10,
+      "oldPrice": 12,
+      "rating": 5,
+      "reviews": 0,
+      "stock": 10,
+      "badge": "new",
+      "description": "NNNNNMMMMMMMHHHHHHHHHHHHHHHH",
+      "video": "https://www.youtube.com/watch?v=a40v9kBz71c",
+      "images": [
+        "https://www.youtube.com/watch?v=a40v9kBz71c"
+      ]
+    },
+    {
+      "id": 1772866954313,
+      "name": "lol",
+      "category": "footwear",
+      "price": 10,
+      "oldPrice": 123,
+      "rating": 5,
+      "reviews": 0,
+      "stock": 10,
+      "badge": null,
+      "description": "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+      "video": "https://www.youtube.com/results?search_query=vocabulary+english+to+bangla",
+      "images": [
+        "https://www.youtube.com/results?search_query=vocabulary+english+to+bangla"
+      ]
+    },
+    {
+      "id": 1772874738911,
+      "name": "kamrul",
+      "category": "accessories",
+      "price": 1203,
+      "oldPrice": 14560,
+      "rating": 5,
+      "reviews": 0,
+      "stock": 10,
+      "badge": "new",
+      "description": "juoplkjhgtuioopk0",
+      "video": "https://www.youtube.com/results?search_query=vocabulary+english+to+bangla",
+      "images": [
+        "https://www.youtube.com/results?search_query=vocabulary+english+to+bangla"
+      ]
+    }
+  ],
+  "lifestyleGallery": [],
+  "lifestyleCollections": [],
+  "businessStats": [
+    {
+      "id": 1772874822120,
+      "value": "100000000000000000000",
+      "label": "khp",
+      "description": "ss deal inter"
+    }
+  ],
+  "businessVentures": [
+    {
+      "id": 1772874856574,
+      "imageUrl": "http://127.0.0.1:5500/khp100-backend/public/shop.html",
+      "title": "khp",
+      "description": "soooooooooooooooo gooooooooood",
+      "link": "http://127.0.0.1:5500/khp100-backend/public/shop.html"
+    }
+  ],
+  "careerTimeline": [
+    {
+      "id": 1772873147746,
+      "year": "2005",
+      "title": "mkkkkkmoo",
+      "description": "mnkloptugkkkkkkkkkkkk"
+    }
+  ],
+  "careerAchievements": [
+    {
+      "id": 1772873175293,
+      "icon": "100",
+      "number": "2",
+      "label": "bolololol"
+    }
+  ],
+  "brands": [
+    {
+      "id": 1772868714096,
+      "icon": "khp",
+      "name": "MKMK",
+      "description": "LOPLOPL"
+    }
+  ]
+}

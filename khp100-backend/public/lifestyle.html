@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kHp10 Lifestyle - Cristiano Ronaldo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .page-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+        }
+
+        .back-home {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s;
+        }
+
+        .back-home:hover {
+            color: #ff0000;
+        }
+
+        .back-home span {
+            font-size: 20px;
+        }
+
+        .page-logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #fff;
+            text-decoration: none;
+            border: 2px solid #ff0000;
+            padding: 5px 12px;
+        }
+
+        .lifestyle-hero {
+            height: 100vh;
+            background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%), url('https://images.unsplash.com/photo-1519677100203-a0e668c92439?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 10%;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content .label {
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-content .label::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -10px;
+            width: 30px;
+            height: 2px;
+            background: #ff0000;
+            transform: translateY(-50%);
+        }
+
+        .hero-content h1 {
+            font-size: 82px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .gallery-section {
+            padding: 100px 50px;
+            background: #000;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #888;
+            font-size: 16px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 30px 20px 20px;
+            transform: translateY(100%);
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .gallery-overlay p {
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        .collection-section {
+            padding: 100px 50px;
+            background: linear-gradient(180deg, #000 0%, #111 100%);
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .collection-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #222;
+            padding: 40px;
+            transition: all 0.3s;
+        }
+
+        .collection-card:hover {
+            border-color: #ff0000;
+            transform: translateY(-10px);
+        }
+
+        .collection-card h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ff0000;
+        }
+
+        .collection-card p {
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .collection-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #ff0000;
+            padding-bottom: 5px;
+        }
+
+        .page-footer {
+            background: #111;
+            padding: 30px 50px;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        .page-footer a {
+            color: #ff0000;
+            text-decoration: none;
+        }
+
+        @media (max-width: 992px) {
+            .hero-content h1 { font-size: 56px; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .collection-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .page-header { padding: 15px 20px; }
+            .hero-content h1 { font-size: 42px; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .collection-card { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="back-home">
+            <span>←</span> BACK TO HOME
+        </a>
+        <div class="page-logo">kHp10</div>
+    </header>
+
+    <section class="lifestyle-hero">
+        <div class="hero-content">
+            <div class="label">kHp10 LIFESTYLE</div>
+            <h1>LIVE LIKE<br>A CHAMPION</h1>
+            <p>Discover the exclusive lifestyle collection that defines Cristiano Ronaldo's elegance, sophistication, and commitment to excellence both on and off the field.</p>
+        </div>
+    </section>
+
+    <!-- Dynamic Gallery Section -->
+    <section class="gallery-section">
+        <div class="section-title">
+            <h2>LIFESTYLE MOMENTS</h2>
+            <p>A glimpse into the champion's world</p>
+        </div>
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Gallery items will be loaded here -->
+            <div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">Loading gallery...</div>
+        </div>
+    </section>
+
+    <!-- Dynamic Collection Section -->
+    <section class="collection-section">
+        <div class="collection-grid" id="collectionGrid">
+            <!-- Collection cards will be loaded here -->
+            <div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">Loading collections...</div>
+        </div>
+    </section>
+
+    <footer class="page-footer">
+        <p>© 2024 kHp10 - Cristiano Ronaldo. All Rights Reserved. <a href="index.html">Return to Home</a></p>
+    </footer>
+
+    <script>
+        async function loadLifestyleData() {
+            try {
+                // Fetch gallery
+                const galleryRes = await fetch('/api/lifestyle/gallery');
+                const galleryItems = await galleryRes.json();
+
+                const galleryGrid = document.getElementById('galleryGrid');
+                if (galleryItems.length === 0) {
+                    galleryGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">No gallery items found.</div>';
+                } else {
+                    let galleryHtml = '';
+                    galleryItems.forEach(item => {
+                        galleryHtml += `
+                            <div class="gallery-item">
+                                <img src="${item.imageUrl}" alt="${item.title}">
+                                <div class="gallery-overlay">
+                                    <h3>${item.title}</h3>
+                                    <p>${item.description}</p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    galleryGrid.innerHTML = galleryHtml;
+                }
+
+                // Fetch collections
+                const collectionsRes = await fetch('/api/lifestyle/collections');
+                const collections = await collectionsRes.json();
+
+                const collectionGrid = document.getElementById('collectionGrid');
+                if (collections.length === 0) {
+                    collectionGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">No collection cards found.</div>';
+                } else {
+                    let collectionHtml = '';
+                    collections.forEach(card => {
+                        collectionHtml += `
+                            <div class="collection-card">
+                                <h3>${card.title}</h3>
+                                <p>${card.description}</p>
+                                <a href="${card.link}" class="collection-link">EXPLORE →</a>
+                            </div>
+                        `;
+                    });
+                    collectionGrid.innerHTML = collectionHtml;
+                }
+            } catch (error) {
+                console.error('Error loading lifestyle data:', error);
+                document.getElementById('galleryGrid').innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">Failed to load data. Make sure the backend is running.</div>';
+                document.getElementById('collectionGrid').innerHTML = '';
+            }
+        }
+
+        window.onload = loadLifestyleData;
+    </script>
+</body>
+</html>

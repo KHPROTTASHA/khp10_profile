@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kHp10 Career Highlights - Cristiano Ronaldo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .page-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+        }
+
+        .back-home {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s;
+        }
+
+        .back-home:hover {
+            color: #ff0000;
+        }
+
+        .back-home span {
+            font-size: 20px;
+        }
+
+        .page-logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #fff;
+            text-decoration: none;
+            border: 2px solid #ff0000;
+            padding: 5px 12px;
+        }
+
+        .career-hero {
+            height: 100vh;
+            background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%), url('https://images.unsplash.com/photo-1566577739112-5180d4bf9390?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 10%;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content .label {
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-content .label::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -10px;
+            width: 30px;
+            height: 2px;
+            background: #ff0000;
+            transform: translateY(-50%);
+        }
+
+        .hero-content h1 {
+            font-size: 82px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .timeline-section {
+            padding: 100px 50px;
+            background: #000;
+        }
+
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #ff0000, #ff0000, transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-year {
+            width: 120px;
+            height: 120px;
+            background: #111;
+            border: 2px solid #ff0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 800;
+            color: #ff0000;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 30px rgba(255,0,0,0.3);
+        }
+
+        .timeline-content {
+            width: calc(50% - 80px);
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #222;
+            padding: 40px;
+            transition: all 0.3s;
+        }
+
+        .timeline-content:hover {
+            border-color: #ff0000;
+            transform: translateY(-5px);
+        }
+
+        .timeline-content h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ff0000;
+        }
+
+        .timeline-content p {
+            color: #aaa;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .achievements-section {
+            padding: 80px 50px;
+            background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .achievement-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #222;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .achievement-card:hover {
+            border-color: #ff0000;
+            transform: translateY(-10px);
+        }
+
+        .achievement-icon {
+            font-size: 48px;
+            font-weight: 800;
+            color: #ff0000;
+            margin-bottom: 20px;
+        }
+
+        .achievement-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .achievement-label {
+            color: #888;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .page-footer {
+            background: #111;
+            padding: 30px 50px;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        .page-footer a {
+            color: #ff0000;
+            text-decoration: none;
+        }
+
+        @media (max-width: 992px) {
+            .hero-content h1 { font-size: 56px; }
+            .timeline-container::before { left: 30px; }
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: row;
+            }
+            .timeline-year { 
+                width: 80px; 
+                height: 80px; 
+                font-size: 24px; 
+                margin-right: 30px;
+            }
+            .timeline-content { width: calc(100% - 110px); }
+            .achievements-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .page-header { padding: 15px 20px; }
+            .hero-content h1 { font-size: 42px; }
+            .timeline-item { flex-direction: column !important; align-items: flex-start; }
+            .timeline-year { margin-bottom: 20px; }
+            .timeline-content { width: 100%; }
+            .achievements-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="back-home">
+            <span>←</span> BACK TO HOME
+        </a>
+        <div class="page-logo">kHp10</div>
+    </header>
+
+    <section class="career-hero">
+        <div class="hero-content">
+            <div class="label">CAREER HIGHLIGHTS</div>
+            <h1>THE GREATEST<br>OF ALL TIME</h1>
+            <p>A journey through the remarkable career of Cristiano Ronaldo - from Madeira to becoming a global football icon.</p>
+        </div>
+    </section>
+
+    <!-- Dynamic Timeline Section -->
+    <section class="timeline-section">
+        <div class="timeline-container" id="timelineContainer">
+            <!-- Timeline events will be loaded here -->
+            <div style="text-align:center; color:#888; padding:40px;">Loading timeline...</div>
+        </div>
+    </section>
+
+    <!-- Dynamic Achievements Section -->
+    <section class="achievements-section">
+        <div class="achievements-grid" id="achievementsGrid">
+            <!-- Achievements will be loaded here -->
+            <div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">Loading achievements...</div>
+        </div>
+    </section>
+
+    <footer class="page-footer">
+        <p>© 2024 kHp10 - Cristiano Ronaldo. All Rights Reserved. <a href="index.html">Return to Home</a></p>
+    </footer>
+
+    <script>
+        (function() {
+            // Ensure fetch uses the correct base URL (works even if page opened via file://)
+            const baseUrl = window.location.origin; // e.g. http://localhost:3000
+
+            async function loadCareerData() {
+                try {
+                    // Fetch timeline
+                    const timelineRes = await fetch(`${baseUrl}/api/career/timeline`);
+                    if (!timelineRes.ok) throw new Error(`HTTP ${timelineRes.status}`);
+                    const timelineEvents = await timelineRes.json();
+
+                    const timelineContainer = document.getElementById('timelineContainer');
+                    if (timelineContainer) {
+                        if (timelineEvents.length === 0) {
+                            timelineContainer.innerHTML = '<div style="text-align:center; color:#888; padding:40px;">No timeline events found.</div>';
+                        } else {
+                            let timelineHtml = '';
+                            timelineEvents.forEach(event => {
+                                timelineHtml += `
+                                    <div class="timeline-item">
+                                        <div class="timeline-year">${event.year}</div>
+                                        <div class="timeline-content">
+                                            <h3>${event.title}</h3>
+                                            <p>${event.description}</p>
+                                        </div>
+                                    </div>
+                                `;
+                            });
+                            timelineContainer.innerHTML = timelineHtml;
+                        }
+                    }
+
+                    // Fetch achievements
+                    const achievementsRes = await fetch(`${baseUrl}/api/career/achievements`);
+                    if (!achievementsRes.ok) throw new Error(`HTTP ${achievementsRes.status}`);
+                    const achievements = await achievementsRes.json();
+
+                    const achievementsGrid = document.getElementById('achievementsGrid');
+                    if (achievementsGrid) {
+                        if (achievements.length === 0) {
+                            achievementsGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">No achievements found.</div>';
+                        } else {
+                            let achievementsHtml = '';
+                            achievements.forEach(ach => {
+                                achievementsHtml += `
+                                    <div class="achievement-card">
+                                        <div class="achievement-icon">${ach.icon}</div>
+                                        <div class="achievement-number">${ach.number}</div>
+                                        <div class="achievement-label">${ach.label}</div>
+                                    </div>
+                                `;
+                            });
+                            achievementsGrid.innerHTML = achievementsHtml;
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error loading career data:', error);
+                    const timelineContainer = document.getElementById('timelineContainer');
+                    const achievementsGrid = document.getElementById('achievementsGrid');
+                    if (timelineContainer) {
+                        timelineContainer.innerHTML = '<div style="text-align:center; color:#888; padding:40px;">Failed to load data. Make sure the backend is running.</div>';
+                    }
+                    if (achievementsGrid) {
+                        achievementsGrid.innerHTML = ''; // clear existing content
+                    }
+                }
+            }
+
+            // Wait for DOM to be ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', loadCareerData);
+            } else {
+                loadCareerData();
+            }
+        })();
+    </script>
+</body>
+</html>
