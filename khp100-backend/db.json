@@ -129,14 +129,52 @@
       ]
     }
   ],
-  "lifestyleGallery": [],
-  "lifestyleCollections": [],
+  "lifestyleGallery": [
+    {
+      "id": 1773306776780,
+      "imageUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "title": "ELEGANCE",
+      "description": "Red carpet moments"
+    },
+    {
+      "id": 1773306910038,
+      "imageUrl": "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "title": "FITNESS",
+      "description": "Dedication and discipline"
+    },
+    {
+      "id": 1773307069227,
+      "imageUrl": "https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "title": "TRAVEL",
+      "description": "Global citizen"
+    }
+  ],
+  "lifestyleCollections": [
+    {
+      "id": 1773306850110,
+      "title": "FRAGRANCES",
+      "description": "Discover the signature scents that capture the essence of determination and success. Each fragrance is crafted with premium ingredients.",
+      "link": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 1773306959309,
+      "title": "FOOTWEAR",
+      "description": "Step into greatness with the kHp10 footwear collection. Designed for performance and style, both on and off the pitch.",
+      "link": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 1773307113152,
+      "title": "APPAREL",
+      "description": "Elevate your everyday style with the kHp10 apparel collection. From casual wear to luxury pieces, define your look.",
+      "link": "https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    }
+  ],
   "businessStats": [
     {
-      "id": 1772874822120,
-      "value": "100000000000000000000",
-      "label": "khp",
-      "description": "ss deal inter"
+      "id": 1773298734188,
+      "value": "11021021000000000010101001",
+      "label": "khp01",
+      "description": "ss deal international"
     }
   ],
   "businessVentures": [
@@ -146,6 +184,13 @@
       "title": "khp",
       "description": "soooooooooooooooo gooooooooood",
       "link": "http://127.0.0.1:5500/khp100-backend/public/shop.html"
+    },
+    {
+      "id": 1773298756207,
+      "imageUrl": "http://127.0.0.1:5500/khp100-backend/public/shop.html",
+      "title": "khp",
+      "description": "bggtyuioooooooooo",
+      "link": "http://127.0.0.1:5500/khp100-backend/public/shop.html"
     }
   ],
   "careerTimeline": [
@@ -154,6 +199,12 @@
       "year": "2005",
       "title": "mkkkkkmoo",
       "description": "mnkloptugkkkkkkkkkkkk"
+    },
+    {
+      "id": 1773298354626,
+      "year": "2015",
+      "title": "mkkkk",
+      "description": "jjjjuiiiiop                ccccccccccaaaaa"
     }
   ],
   "careerAchievements": [
@@ -162,6 +213,12 @@
       "icon": "100",
       "number": "2",
       "label": "bolololol"
+    },
+    {
+      "id": 1773298375701,
+      "icon": "101",
+      "number": "5",
+      "label": "olololol"
     }
   ],
   "brands": [

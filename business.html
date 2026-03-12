@@ -296,82 +296,60 @@
     </footer>
 
     <script>
-        (function() {
-            // ব্যাকএন্ডের ঠিকানা (সর্বদা এই URL ব্যবহার করবে)
-            const API_BASE = 'http://localhost:3000';
+        async function loadBusinessData() {
+            try {
+                // Fetch stats
+                const statsRes = await fetch('/api/business/stats');
+                const stats = await statsRes.json();
 
-            async function loadBusinessData() {
-                try {
-                    // Fetch stats
-                    const statsRes = await fetch(`${API_BASE}/api/business/stats`);
-                    if (!statsRes.ok) throw new Error(`HTTP ${statsRes.status}`);
-                    const stats = await statsRes.json();
-
-                    const statsGrid = document.getElementById('statsGrid');
-                    if (statsGrid) {
-                        if (stats.length === 0) {
-                            statsGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">No stats found.</div>';
-                        } else {
-                            let statsHtml = '';
-                            stats.forEach(stat => {
-                                statsHtml += `
-                                    <div class="stat-item">
-                                        <div class="stat-number">${stat.value}</div>
-                                        <div class="stat-label">${stat.label}</div>
-                                        <div class="stat-desc">${stat.description || ''}</div>
-                                    </div>
-                                `;
-                            });
-                            statsGrid.innerHTML = statsHtml;
-                        }
-                    }
-
-                    // Fetch ventures
-                    const venturesRes = await fetch(`${API_BASE}/api/business/ventures`);
-                    if (!venturesRes.ok) throw new Error(`HTTP ${venturesRes.status}`);
-                    const ventures = await venturesRes.json();
-
-                    const venturesGrid = document.getElementById('venturesGrid');
-                    if (venturesGrid) {
-                        if (ventures.length === 0) {
-                            venturesGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">No ventures found.</div>';
-                        } else {
-                            let venturesHtml = '';
-                            ventures.forEach(venture => {
-                                venturesHtml += `
-                                    <div class="venture-card">
-                                        <div class="venture-image" style="background-image: url('${venture.imageUrl}')"></div>
-                                        <div class="venture-content">
-                                            <h3>${venture.title}</h3>
-                                            <p>${venture.description}</p>
-                                            <a href="${venture.link}" class="venture-link">DISCOVER →</a>
-                                        </div>
-                                    </div>
-                                `;
-                            });
-                            venturesGrid.innerHTML = venturesHtml;
-                        }
-                    }
-                } catch (error) {
-                    console.error('Error loading business data:', error);
-                    const statsGrid = document.getElementById('statsGrid');
-                    const venturesGrid = document.getElementById('venturesGrid');
-                    if (statsGrid) {
-                        statsGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">Failed to load stats. Make sure the backend is running at http://localhost:3000.</div>';
-                    }
-                    if (venturesGrid) {
-                        venturesGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">Failed to load ventures. Check backend connection.</div>';
-                    }
+                const statsGrid = document.getElementById('statsGrid');
+                if (stats.length === 0) {
+                    statsGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">No stats found.</div>';
+                } else {
+                    let statsHtml = '';
+                    stats.forEach(stat => {
+                        statsHtml += `
+                            <div class="stat-item">
+                                <div class="stat-number">${stat.value}</div>
+                                <div class="stat-label">${stat.label}</div>
+                                <div class="stat-desc">${stat.description || ''}</div>
+                            </div>
+                        `;
+                    });
+                    statsGrid.innerHTML = statsHtml;
                 }
-            }
 
-            // DOM ready হলে ফাংশন চালাও
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', loadBusinessData);
-            } else {
-                loadBusinessData();
+                // Fetch ventures
+                const venturesRes = await fetch('/api/business/ventures');
+                const ventures = await venturesRes.json();
+
+                const venturesGrid = document.getElementById('venturesGrid');
+                if (ventures.length === 0) {
+                    venturesGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">No ventures found.</div>';
+                } else {
+                    let venturesHtml = '';
+                    ventures.forEach(venture => {
+                        venturesHtml += `
+                            <div class="venture-card">
+                                <div class="venture-image" style="background-image: url('${venture.imageUrl}')"></div>
+                                <div class="venture-content">
+                                    <h3>${venture.title}</h3>
+                                    <p>${venture.description}</p>
+                                    <a href="${venture.link}" class="venture-link">DISCOVER →</a>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    venturesGrid.innerHTML = venturesHtml;
+                }
+            } catch (error) {
+                console.error('Error loading business data:', error);
+                document.getElementById('statsGrid').innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">Failed to load data. Make sure the backend is running.</div>';
+                document.getElementById('venturesGrid').innerHTML = '';
             }
-        })();
+        }
+
+        window.onload = loadBusinessData;
     </script>
 </body>
 </html>

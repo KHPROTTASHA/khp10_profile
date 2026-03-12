@@ -313,13 +313,13 @@
 
     <script>
         (function() {
-            // ব্যাকএন্ডের ঠিকানা (সর্বদা এই URL ব্যবহার করবে)
-            const API_BASE = 'http://localhost:3000';
+            // Ensure fetch uses the correct base URL (works even if page opened via file://)
+            const baseUrl = window.location.origin; // e.g. http://localhost:3000
 
             async function loadCareerData() {
                 try {
-                    // টাইমলাইন ডেটা আনা
-                    const timelineRes = await fetch(`${API_BASE}/api/career/timeline`);
+                    // Fetch timeline
+                    const timelineRes = await fetch(`${baseUrl}/api/career/timeline`);
                     if (!timelineRes.ok) throw new Error(`HTTP ${timelineRes.status}`);
                     const timelineEvents = await timelineRes.json();
 
@@ -344,8 +344,8 @@
                         }
                     }
 
-                    // অ্যাচিভমেন্ট ডেটা আনা
-                    const achievementsRes = await fetch(`${API_BASE}/api/career/achievements`);
+                    // Fetch achievements
+                    const achievementsRes = await fetch(`${baseUrl}/api/career/achievements`);
                     if (!achievementsRes.ok) throw new Error(`HTTP ${achievementsRes.status}`);
                     const achievements = await achievementsRes.json();
 
@@ -372,15 +372,15 @@
                     const timelineContainer = document.getElementById('timelineContainer');
                     const achievementsGrid = document.getElementById('achievementsGrid');
                     if (timelineContainer) {
-                        timelineContainer.innerHTML = '<div style="text-align:center; color:#888; padding:40px;">Failed to load data. Make sure the backend is running at http://localhost:3000.</div>';
+                        timelineContainer.innerHTML = '<div style="text-align:center; color:#888; padding:40px;">Failed to load data. Make sure the backend is running.</div>';
                     }
                     if (achievementsGrid) {
-                        achievementsGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">Failed to load achievements. Check backend connection.</div>';
+                        achievementsGrid.innerHTML = ''; // clear existing content
                     }
                 }
             }
 
-            // DOM ready হলে ফাংশন চালাও
+            // Wait for DOM to be ready
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', loadCareerData);
             } else {

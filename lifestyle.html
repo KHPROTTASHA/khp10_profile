@@ -300,81 +300,58 @@
     </footer>
 
     <script>
-        (function() {
-            // ব্যাকএন্ডের ঠিকানা (সর্বদা এই URL ব্যবহার করবে)
-            const API_BASE = 'http://localhost:3000';
-
-            async function loadLifestyleData() {
-                try {
-                    // Fetch gallery
-                    const galleryRes = await fetch(`${API_BASE}/api/lifestyle/gallery`);
-                    if (!galleryRes.ok) throw new Error(`HTTP ${galleryRes.status}`);
-                    const galleryItems = await galleryRes.json();
-
-                    const galleryGrid = document.getElementById('galleryGrid');
-                    if (galleryGrid) {
-                        if (galleryItems.length === 0) {
-                            galleryGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">No gallery items found.</div>';
-                        } else {
-                            let galleryHtml = '';
-                            galleryItems.forEach(item => {
-                                galleryHtml += `
-                                    <div class="gallery-item">
-                                        <img src="${item.imageUrl}" alt="${item.title}">
-                                        <div class="gallery-overlay">
-                                            <h3>${item.title}</h3>
-                                            <p>${item.description}</p>
-                                        </div>
-                                    </div>
-                                `;
-                            });
-                            galleryGrid.innerHTML = galleryHtml;
-                        }
-                    }
-
-                    // Fetch collections
-                    const collectionsRes = await fetch(`${API_BASE}/api/lifestyle/collections`);
-                    if (!collectionsRes.ok) throw new Error(`HTTP ${collectionsRes.status}`);
-                    const collections = await collectionsRes.json();
-
-                    const collectionGrid = document.getElementById('collectionGrid');
-                    if (collectionGrid) {
-                        if (collections.length === 0) {
-                            collectionGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">No collection cards found.</div>';
-                        } else {
-                            let collectionHtml = '';
-                            collections.forEach(card => {
-                                collectionHtml += `
-                                    <div class="collection-card">
-                                        <h3>${card.title}</h3>
-                                        <p>${card.description}</p>
-                                        <a href="${card.link}" class="collection-link">EXPLORE →</a>
-                                    </div>
-                                `;
-                            });
-                            collectionGrid.innerHTML = collectionHtml;
-                        }
-                    }
-                } catch (error) {
-                    console.error('Error loading lifestyle data:', error);
-                    const galleryGrid = document.getElementById('galleryGrid');
-                    const collectionGrid = document.getElementById('collectionGrid');
-                    if (galleryGrid) {
-                        galleryGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">Failed to load gallery. Make sure the backend is running at http://localhost:3000.</div>';
-                    }
-                    if (collectionGrid) {
-                        collectionGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">Failed to load collections. Check backend connection.</div>';
-                    }
+        async function loadLifestyleData() {
+            try {
+                // Fetch gallery
+                const galleryRes = await fetch('/api/lifestyle/gallery');
+                const galleryItems = await galleryRes.json();
+ 
+                const galleryGrid = document.getElementById('galleryGrid');
+                if (galleryItems.length === 0) {
+                    galleryGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">No gallery items found.</div>';
+                } else {
+                    let galleryHtml = '';
+                    galleryItems.forEach(item => {
+                        galleryHtml += `
+                            <div class="gallery-item">
+                                <img src="${item.imageUrl}" alt="${item.title}">
+                                <div class="gallery-overlay">
+                                    <h3>${item.title}</h3>
+                                    <p>${item.description}</p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    galleryGrid.innerHTML = galleryHtml;
                 }
-            }
 
-            // DOM ready হলে ফাংশন চালাও
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', loadLifestyleData);
-            } else {
-                loadLifestyleData();
+                // Fetch collections
+                const collectionsRes = await fetch('/api/lifestyle/collections');
+                const collections = await collectionsRes.json();
+                const collectionGrid = document.getElementById('collectionGrid');
+                if (collections.length === 0) {
+                    collectionGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">No collection cards found.</div>';
+                } else {
+                    let collectionHtml = '';
+                    collections.forEach(card => {
+                        collectionHtml += `
+                            <div class="collection-card">
+                                <h3>${card.title}</h3>
+                                <p>${card.description}</p>
+                                <a href="${card.link}" class="collection-link">EXPLORE →</a>
+                            </div>
+                        `;
+                    });
+                    collectionGrid.innerHTML = collectionHtml;
+                }
+            } catch (error) {
+                console.error('Error loading lifestyle data:', error);
+                document.getElementById('galleryGrid').innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:40px;">Failed to load data. Make sure the backend is running.</div>';
+                document.getElementById('collectionGrid').innerHTML = '';
             }
-        })();
+        }
+
+        window.onload = loadLifestyleData;
     </script>
 </body>
 </html>
